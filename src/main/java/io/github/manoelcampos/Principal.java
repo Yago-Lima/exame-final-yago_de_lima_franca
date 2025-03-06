@@ -4,7 +4,7 @@ package io.github.manoelcampos;
  * Classe para implementar o uso dos compressores de texto após
  * a aplicação do(s) padrão(ões) de projeto que se enquadre(m) com o contexto apresentado no README.
  *
- * @author Manoel Campos
+ * @author Yago de Lima França
 */
 public class Principal {
     public static void main(final String[] args) {
