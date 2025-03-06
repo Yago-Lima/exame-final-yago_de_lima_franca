@@ -9,14 +9,9 @@ import java.util.HashMap;
  */
 public class WordSubstitutionCompression implements CompressionStrategy {
 
-    /**
-     * Comprime o texto armazenado em {@link #text},
-     * o substituindo pela versão comprimida.
-     */
     @Override
     public String compress(String text) {
         final String[] words = text.split(" ");
-        // Um mapa onde a chave é uma palavra e o valor é a posição que tal palavra aparece pela 1a vez no texto
         final var wordIndexMap = new HashMap<String, Integer>();
         final var compressed = new StringBuilder();
         int index = 0;
@@ -30,10 +25,6 @@ public class WordSubstitutionCompression implements CompressionStrategy {
         return wordIndexMap + "|" + compressed.toString().trim();
     }
 
-    /**
-     * Descomprime o texto armazenado em {@link #text},
-     * o substituindo pela versão descomprimida.
-     */
     @Override
     public String decompress(String text) {
         final String[] parts = text.split("\\|");
