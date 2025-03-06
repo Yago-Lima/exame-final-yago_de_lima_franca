@@ -5,19 +5,16 @@ import java.util.HashMap;
 /**
  * Implementa algoritmo de compressão de texto Word Substitution,
  * que substitui palavras repetidas por um índice numa tabela.
- * @author Fulano
+ * @author Yago de Lima França
  */
-public class WordSubstitutionCompression {
-    /**
-     * Texto a ser comprimido.
-     */
-    private String text;
+public class WordSubstitutionCompression implements CompressionStrategy {
 
     /**
      * Comprime o texto armazenado em {@link #text},
      * o substituindo pela versão comprimida.
      */
-    public void compressText() {
+    @Override
+    public String compress(String text) {
         final String[] words = text.split(" ");
         // Um mapa onde a chave é uma palavra e o valor é a posição que tal palavra aparece pela 1a vez no texto
         final var wordIndexMap = new HashMap<String, Integer>();
@@ -30,15 +27,14 @@ public class WordSubstitutionCompression {
             }
             compressed.append(wordIndexMap.get(word)).append(" ");
         }
-
-        this.text = wordIndexMap + "|" + compressed.toString().trim();
+        return wordIndexMap + "|" + compressed.toString().trim();
     }
 
     /**
      * Descomprime o texto armazenado em {@link #text},
      * o substituindo pela versão descomprimida.
      */
-    public void decompressText() {
+    public void decompress() {
         final String[] parts = text.split("\\|");
         final var dictionary = new HashMap<Integer, String>();
 
