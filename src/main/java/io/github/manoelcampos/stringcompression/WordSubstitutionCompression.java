@@ -34,7 +34,8 @@ public class WordSubstitutionCompression implements CompressionStrategy {
      * Descomprime o texto armazenado em {@link #text},
      * o substituindo pela versão descomprimida.
      */
-    public void decompress() {
+    @Override
+    public String decompress(String text) {
         final String[] parts = text.split("\\|");
         final var dictionary = new HashMap<Integer, String>();
 
@@ -49,14 +50,6 @@ public class WordSubstitutionCompression implements CompressionStrategy {
             decompressed.append(dictionary.get(Integer.parseInt(index))).append(" ");
         }
 
-        this.text = decompressed.toString().trim();
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(final String text) {
-        this.text = text;
+        return decompressed.toString().trim();
     }
 }
