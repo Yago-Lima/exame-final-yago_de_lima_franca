@@ -9,11 +9,11 @@ public final class CompressionFactory {
     private CompressionFactory() {
     }
 
-    public static CompressionStrategy getCompressionAlgorithm(String algorithmName) {
+    public static CompressionStrategy getCompressionAlgorithm(CompressionType algorithmName) {
         switch (algorithmName) {
-            case "RLE":
+            case CompressionType.RLE:
                 return new RLECompression();
-            case "WordSubstitution":
+            case CompressionType.WORD_SUBSTITUTION:
                 return new WordSubstitutionCompression();
             default:
                 throw new IllegalArgumentException("Unknown compression algorithm: " + algorithmName);
