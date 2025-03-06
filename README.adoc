@@ -1,0 +1,80 @@
+= Exame Final
+
+Compressão de dados é um recurso muito usado em aplicações para reduzir a quantidade de dados a serem armazenados ou transmitidos.
+Existem inúmeros algoritmos de compressão de diferentes tipos e para diferentes propósitos.
+Existem algoritmos de propósito geral como zip, gzip e outros que permitem comprimir/descomprimir qualquer
+tipo de dado. Por outro lado, há algoritmos de compressão específico para imagens e vídeos, como JPEG e MPEG
+que fazem compressão com perda de qualidade (perda de dados).
+
+Já para texto, há também inúmeros algoritmos:
+
+- dos mais simples e rápidos, mas com menor taxa de compressão;
+- até os mais complexos e demorados, só que com alta taxa de compressão.
+
+Considere que uma aplicação precisa comprimir/descomprimir texto, usando algoritmos específicos para isto,
+mas a equipe responsável não encontrou nenhuma biblioteca confiável, atualizada para sua versão do JDK e que esteja sendo ativamente mantida.
+Assim, no lugar de depender de uma biblioteca de terceiro, vocês optaram por criar suas próprias implementações
+de compressores de texto.
+
+Este projeto então fornece 2 implementações que teriam sido criadas por vocês, só que
+como foram implementadas por membros diferentes da equipe, por falta de comunicação, acabaram
+tendo modelagens diferentes. De qualquer forma, você pode alterar o código como bem entender.
+
+O projeto possui uma classe `RLECompression` que implementa um algoritmo muito trivial de compressão de texto, chamado Run-Length Encoding (RLE),
+ideal para textos com muitas repetições de caracteres. Ele gera uma representação comprimida do texto a partir da contagem de caracteres repetidos.
+Isso quer dizer que ele será mais eficiente, alcançando uma maior taxa de compressão,
+se o texto tiver muitos caracteres repetidos em sequência.
+
+Já a classe `WordSubstitutionCompression` implementa um algoritmo mais adequado para textos com muitas palavras repetidas,
+pois ele cria um dicionário para cada palavra no texto, gerando uma representação comprimida do texto a partir deste dicionário.
+Portanto, dependendo do texto original, a compressão pode ser melhor ou pior dependendo do algoritmo escolhido.
+Se um algoritmo que analisa palavras for usada para um texto que não contém palavras (apenas caracteres isolados),
+a compressão pode gerar uma string com tamanho maior que o texto original, perdendo todo o sentido de usar tal algoritmo.
+Mas aqui não estamos preocupados na escolha do algoritmo ideal. Você nem precisa entender como os algoritmos de compressão e descompressão funcionam.
+
+== Requisitos
+
+1) (2 pontos) O maior desafio aqui é alterar a modelagem das classes fornecidas para padronizar o uso de qualquer algoritmo de compressão existente ou
+que seja futuramente implementado no projeto. Com isso, a aplicação deve permitir que possamos trocar um algoritmo por outro sem precisar
+sair alterando várias partes do código.
+
+2) (2 pontos) A classe `Principal` deverá utilizar as implementações dos algoritmos de forma padronizada, permitindo trocar um algoritmo por outro a qualquer momento. No entanto, tal classe não deve instanciar o objeto que implementa o algoritmo de compressão diretamente.
+Ela não deve saber o nome das classes concretas que implementam tais algoritmos.
+A `Principal` deve indicar o nome do algoritmo que deseja utilizar (como "RLE" ou "WordSubstitution") e uma instância da classe que implementa tal algoritmo deve ser criada (se existir uma implementação para o algoritmo com o nome indicado).
+Apesar de podermos usar enums para definir o tipo de algoritmo (que é abordagem mais prática e intuitiva), o uso de String é
+comum no próprio JDK, como em métodos como `Cipher.getInstance("AES")`, que obtém uma instância de um algoritmo de criptografia
+a partir do nome do mesmo. Então aqui, vamos fazer da forma mais simples com String.
+
+Para que estes 2 requisitos sejam alcançados, você deve aplicar um ou mais padrões de projetos.
+
+3) (2 pontos) Você deve analisar como as classes implementados são utilizadas e verificar o que pode haver de inadequado nesta forma de utilização,
+principalmente se há algo não convencional que viole o "Princípio do Menor Espanto" (https://en.wikipedia.org/wiki/Principle_of_least_astonishment[Principle of Least Astonishment, PoLA]). Compare as duas classes para tentar perceber
+o que pode haver de estranho.
+Observe que você não deve se preocupar com o código interno dos métodos das classes, mas apenas
+com a estrutura delas (incluindo atributos e assinatura de métodos) que possam inclusive dificultar a padronização
+das implementações. Veja o item abaixo antes de fazer qualquer alteração,
+que vai lhe ajudar a entender como as implementações são utilizadas.
+Em seguida, você deve descrever aqui abaixo que problemas são esses e o que fez para resolver.
+
+4) (1 ponto) O projeto possui uma classe de testes `CompressionTest`. Você não precisa entender de testes ou JUnit para entender o funcionamento
+deste código. Basta abrir tal classe e clicar no botão "Play" no topo dela para executar todos os testes.
+Execute os testes antes de alterar o código para entender qual o resultado deve obter.
+Adicionalmente, veja o código dos testes para entender como as classes são utilizadas.
+
+Após fazer as alterações na modelagem das classes, você deve alterar a classe de testes conforme necessário.
+A classe de testes pode instanciar diretamente os compressores de texto como já faz.
+Todos os testes precisam estar passando.
+
+5) (3 pontos) Por fim, você deve alterar a classe `Principal` para usar algum dos compressores a partir da sua nova modelagem,
+permitindo que seja trocado um compressor por outro, sem que a `Principal` ao menos saiba o nome das classes dos compressores.
+O código na classe principal pode ser semelhante (que não significa que obrigatoriamente será igual)
+ao código de algum dos testes na classe `CompressionTest`,.
+
+== Entrega da Prova
+
+Antes de entregar a prova, apague a pasta `target` e coloque seu nome completo na tag `@author` do JavaDoc de qualquer classe existente no projeto.
+Se não tiver seu nome em alguma classe, o arquivo será ignorado.
+
+O projeto precisa compilar, caso contrário, seu projeto não será avaliado.
+
+
