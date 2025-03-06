@@ -7,11 +7,6 @@ package io.github.manoelcampos.stringcompression;
  * @author Yago de Lima França
  */
 public class RLECompression implements CompressionStrategy{
-    /**
-     * Comprime o texto passado por parâmetro
-     * @param text texto a ser comprimido
-     * @return a versão comprimida do texto
-     */
     @Override
     public String compress(final String text) {
         if(text.length() <= 1)
@@ -32,11 +27,6 @@ public class RLECompression implements CompressionStrategy{
         return compressed.toString();
     }
 
-    /**
-     * Descomprime um texto passado por parâmetro
-     * @param compressed texto comprimido
-     * @return texto descomprimido
-     */
     @Override
     public String decompress(final String compressed) {
         if(compressed.length() <= 1)
@@ -59,5 +49,4 @@ public class RLECompression implements CompressionStrategy{
 
         return decompressed.toString();
     }
-
 }
