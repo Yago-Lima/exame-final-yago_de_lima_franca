@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Testa as implementações dos compressores de texto {@link RLECompression} e {@link WordSubstitutionCompression}.
- * @author Manoel Campos
+ * @author yago de Lima Franca
  */
 class CompressionTest {
     /**
@@ -37,13 +37,9 @@ class CompressionTest {
     @Test
     void wordSubstitutionCompression() {
         final String text = "casa sistema carro sistema casa controle casa casa controle bolsa casa bola rua bola casa bola casa casa carro casa bola bola";
-        final var compressor = new WordSubstitutionCompression();
-        compressor.setText(text);
-        compressor.compressText();
-        final String compressed = compressor.getText();
-
-        compressor.decompressText();
-        final String decompressed = compressor.getText();
+        final CompressionStrategy compressor = new WordSubstitutionCompression();
+        final String compressed = compressor.compress(text);
+        final String decompressed = compressor.decompress(compressed);
 
         System.out.println("Algoritmo de Compressão Substituição de Palavras");
         System.out.printf("Fonte         | Caracteres | Texto %n");
