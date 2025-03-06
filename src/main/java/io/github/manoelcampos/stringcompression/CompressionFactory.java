@@ -5,7 +5,9 @@ package io.github.manoelcampos.stringcompression;
  *
  * @author Yago de Lima França
  */
-public class CompressionFactory {
+public final class CompressionFactory {
+    private CompressionFactory() {
+    }
 
     public static CompressionStrategy getCompressionAlgorithm(String algorithmName) {
         switch (algorithmName) {
