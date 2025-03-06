@@ -4,14 +4,15 @@ package io.github.manoelcampos.stringcompression;
  * Implementa algoritmo de compressão de texto Run-Length Encoding (RLE),
  * que substitui sequências repetidas de caracteres por um contador e o próprio caractere.
  *
- * @author Beltrano
+ * @author Yago de Lima França
  */
-public class RLECompression {
+public class RLECompression implements CompressionStrategy{
     /**
      * Comprime o texto passado por parâmetro
      * @param text texto a ser comprimido
      * @return a versão comprimida do texto
      */
+    @Override
     public String compress(final String text) {
         if(text.length() <= 1)
             return text;
@@ -36,6 +37,7 @@ public class RLECompression {
      * @param compressed texto comprimido
      * @return texto descomprimido
      */
+    @Override
     public String decompress(final String compressed) {
         System.out.println("compressed: " + compressed);
         if(compressed.length() <= 1)
@@ -58,4 +60,5 @@ public class RLECompression {
 
         return decompressed.toString();
     }
+
 }
