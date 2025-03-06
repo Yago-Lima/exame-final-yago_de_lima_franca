@@ -39,7 +39,6 @@ public class RLECompression implements CompressionStrategy{
      */
     @Override
     public String decompress(final String compressed) {
-        System.out.println("compressed: " + compressed);
         if(compressed.length() <= 1)
             return compressed;
 
